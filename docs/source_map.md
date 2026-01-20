@@ -37,5 +37,8 @@
   - `Amount` represents expected deal value, not guaranteed or recognized revenue.
   - Opportunity status is derived from fields such as `StageName`, `IsClosed`, and `IsWon`.
   - Closed opportunities may not directly correspond to Stripe billing records and should be reconciled carefully with invoicing data.
+ 
+#### salesforce_opportunity_stage_history
+
 
 ## Stripe
