@@ -71,3 +71,171 @@ Used to model:
 
 This project follows a **modern analytics engineering architecture**:
 
+`Raw Sources → Staging → Intermediate → Marts`
+
+### Raw
+- Vendor-extracted data (CSV + SQLite)
+- No transformations applied
+- Includes imperfect, messy, real-world data
+
+### Staging
+- Column renaming and type casting
+- Standardized naming conventions
+- Source-specific cleanup only
+
+### Intermediate
+- Business logic
+- Schema alignment across sources
+- Canonical event naming
+- Subscription and account history models
+
+### Marts
+- Analytics-ready fact and dimension tables
+- Stable schemas for BI and reporting
+- Clear table grain and metric definitions
+
+---
+
+## Project Structure
+```md
+b2b-analytics-engineering/
+├── README.md
+├── warehouse/
+│   ├── raw_sources.sqlite
+│   └── raw_sources_delta.sqlite
+├── models/
+│   ├── sources/
+│   ├── staging/
+│   ├── intermediate/
+│   └── marts/
+│       ├── finance/
+│       ├── sales/
+│       ├── product/
+│       └── dimensions/
+├── tests/
+├── macros/
+├── snapshots/
+└── docs/
+```
+
+---
+
+## Tools & Technologies Used
+
+This project uses a modern analytics engineering toolset commonly found in production environments.
+
+### Data Storage
+- **SQLite**
+  - Used to simulate a cloud data warehouse locally
+  - Stores raw source data and delta (backfill) batches
+
+### Transformation & Modeling
+- **SQL**
+  - Primary language for data transformations
+  - Used across staging, intermediate, and mart layers
+- **dbt-style project structure**
+  - Source definitions
+  - Staging models
+  - Intermediate business logic
+  - Analytics marts
+  - Tests and documentation
+
+### Version Control
+- **Git / GitHub**
+  - Project versioning
+  - Documentation-first workflow
+  - Incremental development and refactors
+
+### Data Quality & Testing
+- **Schema tests**
+  - Primary key uniqueness
+  - Not-null constraints
+  - Accepted values
+- **Custom business logic tests**
+  - Revenue sanity checks
+  - Payment and invoice reconciliation
+
+### Documentation
+- **YAML-based source documentation**
+- **Markdown**
+  - Source maps
+  - Metric definitions
+  - Data dictionary
+
+---
+
+## Key Analytics Concepts Covered
+
+### Dimensional Modeling
+- Explicit fact vs dimension separation
+- Clearly defined table grain
+- Account, customer, user, and plan dimensions
+
+### SQL Transformations
+- Multi-source joins
+- Deduplication logic
+- Time-based aggregations
+- Currency normalization
+
+### Schema Alignment
+- Event naming consistency across versions
+- Unified account identity across Salesforce, Stripe, and Segment
+
+### Backfills
+- Late-arriving product events
+- Late-arriving invoice payments
+- Reconciliation of historical metrics
+
+### Migrations
+- Event taxonomy changes
+- Subscription plan changes and upgrades
+- Forward-compatible modeling patterns
+
+### Refactors
+- Separation of concerns between staging, logic, and marts
+- Introduction of canonical intermediate models
+- Incremental improvements without breaking downstream models
+
+---
+
+## Data Quality & Testing
+
+The project includes:
+- Primary key uniqueness tests
+- Not-null constraints
+- Accepted value tests
+- Relationship tests between facts and dimensions
+- Custom business logic validations (e.g. revenue non-negativity)
+
+---
+
+## Documentation
+
+Supporting documentation lives in `/docs`, including:
+- Source maps
+- Metric definitions
+- Data dictionary
+- Modeling assumptions and known limitations
+
+---
+### Optional Extensions (Future Work)
+- dbt Core or dbt Cloud
+- DuckDB / BigQuery / Snowflake
+- BI tools (Looker, Power BI, Tableau)
+- Orchestration (Airflow)
+
+---
+## Disclaimer
+
+All data in this repository is **synthetic** and generated for learning and demonstration purposes only.  
+No real customer or company data is used.
+
+---
+
+## Why This Project Exists
+
+This project is intentionally scoped to reflect **what analytics engineers actually do at work**, rather than toy examples:
+- Messy inputs
+- Changing schemas
+- Business-driven modeling decisions
+- Tradeoffs between correctness, performance, and usability
