@@ -7,7 +7,7 @@
 #### salesforce_account
 - Description: Represents an organization/company record in Salesforce CRM. This table is the CRM “account” entity used to group contacts and opportunities, and it may include both active customers and non-customer prospects depending on how the business uses Salesforce.
 - Primary key:`Id`
-- Important timestamps: CreatedDate (when the account record was created in Salesforce; not necessarily when the customer started paying)
+- Important timestamps: `CreatedDate` (when the account record was created in Salesforce; not necessarily when the customer started paying)
 - Grain: 1 row per Salesforce account (`Id`)
 - Notes / assumptions:
     - Accounts may exist without Stripe billing records (prospects, churned customers, or missing mappings).
